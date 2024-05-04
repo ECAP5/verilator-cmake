@@ -1,2 +1,2 @@
 # verilator-cmake
-CMake verilator bindings for simulating HDL
+CMake verilator bindings for verilating at configuration
