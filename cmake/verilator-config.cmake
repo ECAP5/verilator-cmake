@@ -166,7 +166,7 @@ define_property(TARGET
 function(verilate TARGET)
   cmake_parse_arguments(VERILATE "COVERAGE;TRACE;TRACE_FST;SYSTEMC;TRACE_STRUCTS;PUBLIC"
                                  "PREFIX;TOP_MODULE;THREADS;TRACE_THREADS;DIRECTORY"
-                                 "SOURCES;VERILATOR_ARGS;INCLUDE_DIRS;OPT_SLOW;OPT_FAST;OPT_GLOBAL"
+                                 "SOURCES;VERILATOR_ARGS;INCLUDE_DIRS;OPT_SLOW;OPT_FAST;OPT_GLOBAL;DEFINES"
                                  ${ARGN})
   if (NOT VERILATE_SOURCES)
     message(FATAL_ERROR "Need at least one source")
@@ -226,6 +226,11 @@ function(verilate TARGET)
 
   foreach(INC ${VERILATE_INCLUDE_DIRS})
     list(APPEND VERILATOR_ARGS -y "${INC}")
+  endforeach()
+
+  # Generate the define parameter string
+  foreach(DEFINE IN LISTS SYNTH_DEFINES)
+    list(APPEND VERILATOR_ARGS"-D${DEFINE}")
   endforeach()
 
   string(TOLOWER ${CMAKE_CXX_COMPILER_ID} COMPILER)
