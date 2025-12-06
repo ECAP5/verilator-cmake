@@ -229,8 +229,8 @@ function(verilate TARGET)
   endforeach()
 
   # Generate the define parameter string
-  foreach(DEFINE IN LISTS SYNTH_DEFINES)
-    list(APPEND VERILATOR_ARGS"-D${DEFINE}")
+  foreach(DEFINE IN LISTS VERILATE_DEFINES)
+    list(APPEND VERILATOR_ARGS "-D${DEFINE}")
   endforeach()
 
   string(TOLOWER ${CMAKE_CXX_COMPILER_ID} COMPILER)
